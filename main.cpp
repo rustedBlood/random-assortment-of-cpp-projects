@@ -1,14 +1,18 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include <map>
+#include <unordered_map>
 #include <libconfig.h++>
-#include "lol.h"
+
+#include "player.h"
+#include "attributes.h"
+#include "baseentity.h"
 
 int main()
 {
-    unique_ptr<player> playerOne(new player);
-    map<string, attribute_class> attribute_classes = generate_attribute_classes();
+    std::unique_ptr<player> playerOne(new player);
+    std::unique_ptr<attribute_handler> attribute_system(new attribute_handler);
+    std::unordered_map<std::string, attribute_class> attribute_classes = attribute_system -> get_attribute_map();
 
     playerOne -> add_attribute(1.5, "Damage Bonus", attribute_classes["damage_mult"]);
     playerOne -> add_attribute(0.5, "Damage Penalty", attribute_classes["damage_mult"]);
@@ -19,12 +23,10 @@ int main()
     double damagePctMod = playerOne -> accumulate_attribute(1.0, "damage_mult");
     double damageBaseMod = playerOne -> accumulate_attribute(0.0, "base_damage");
 
-    cout << damagePctMod << " Damage Multiplier\n";
-    cout << damageBaseMod << " Base Damage Modifier\n";
+    std::cout << damagePctMod << " Damage Multiplier\n";
+    std::cout << damageBaseMod << " Base Damage Modifier\n";
 
-    cout << (playerOne -> damage + damageBaseMod) * damagePctMod << " Output Damage\n";
-
-    playerOne -> print_attributes();
+    std::cout << (playerOne -> get_damage()  + damageBaseMod) * damagePctMod << " Output Damage\n";
 
     return 0;
 }
