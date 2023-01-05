@@ -1,8 +1,4 @@
-#include "attributes.h"
-
-attribute_handler::attribute_handler():
-    attribute_map(generate_attribute_map())
-{}
+#include "project/attributes.h"
 
 std::unordered_map<std::string, attribute_class> attribute_handler::get_attribute_map(){
     return attribute_map;
@@ -53,3 +49,7 @@ std::unordered_map<std::string, attribute_class> generate_attribute_map(){
 
     return attribute_map;
 }
+
+attribute_handler::attribute_handler():
+    attribute_map(generate_attribute_map())
+{}

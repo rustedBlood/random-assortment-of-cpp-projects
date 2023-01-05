@@ -4,13 +4,14 @@
 #include <unordered_map>
 #include <libconfig.h++>
 
-#include "player.h"
-#include "attributes.h"
-#include "baseentity.h"
+#include "project/player.h"
+#include "project/attributes.h"
+#include "project/baseentity.h"
+
 
 int main()
 {
-    std::unique_ptr<player> playerOne(new player);
+    std::unique_ptr<player> playerOne(new player("d"));
     std::unique_ptr<attribute_handler> attribute_system(new attribute_handler);
     std::unordered_map<std::string, attribute_class> attribute_classes = attribute_system -> get_attribute_map();
 
@@ -27,6 +28,8 @@ int main()
     std::cout << damageBaseMod << " Base Damage Modifier\n";
 
     std::cout << (playerOne -> get_damage()  + damageBaseMod) * damagePctMod << " Output Damage\n";
+
+
 
     return 0;
 }

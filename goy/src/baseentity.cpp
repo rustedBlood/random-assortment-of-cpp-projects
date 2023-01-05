@@ -1,17 +1,12 @@
-#include <iostream>
-#include <vector>
-#include <attributes.h>
-#include <map>
-#include <libconfig.h++>
+#include "project/baseentity.h"
 
-#include "baseentity.h"
-
-entity::entity():
+entity::entity(std::string sName):
     health(30.0),
-    damage(1.0)
+    damage(1.0),
+    name(sName)
 {}
 
-double entity::accumulate_attribute(double total = 1.0, std::string classname = ""){
+double entity::accumulate_attribute(double total, std::string classname){
     for(attribute iter : attributes) {
         if(iter.attr_class.name != classname)
             continue;
@@ -27,6 +22,7 @@ double entity::accumulate_attribute(double total = 1.0, std::string classname = 
 }
 
 void entity::print_attributes(){
+    std::cout << "Attributes of " + name;
     for(attribute iter : attributes) {
         std::cout << iter.name << " | " << iter.value << "\n";
     }
@@ -50,4 +46,12 @@ double entity::get_damage(){
 }
 double entity::get_health(){
     return health;
+}
+
+void entity::set_health(double input){
+    health = input;
+}
+
+void entity::set_damage(double input){
+    damage = input;
 }

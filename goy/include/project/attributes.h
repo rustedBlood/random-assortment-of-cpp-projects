@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <vector>
 #include <unordered_map>
@@ -18,6 +20,7 @@ struct attribute{
 class attribute_handler{
     public:
         std::unordered_map<std::string, attribute_class> get_attribute_map();
+        attribute_handler();
     private:
         std::unordered_map<std::string, attribute_class> attribute_map;
 };
