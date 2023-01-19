@@ -29,7 +29,7 @@ int main()
 
     std::cout << (playerOne -> get_damage()  + damageBaseMod) * damagePctMod << " Output Damage\n";
 
-
+    
 
     return 0;
 }
